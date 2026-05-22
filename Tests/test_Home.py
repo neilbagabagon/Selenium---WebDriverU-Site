@@ -1,11 +1,26 @@
-import time
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import pytest
+from selenium import webdriver
+from Pages.home_page import HomePage
 
-def test_homepage(driver):
-    driver.set_page_load_timeout(30)  # wait up to 30s for page load
-    driver.get("https://webdriveruniversity.com/")
-    time.sleep(5)  # then pause 5s
+@pytest.fixture
+def driver():
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    yield driver
+    driver.quit()
 
-    assert "WebDriverUniversity.com" in driver.title
+def test_scroll(driver):
+    page = HomePage(driver)
+    page.open()
+    page.scroll_page()
+
+
+def test_logo_button(driver):
+    page = HomePage(driver)
+    page.open()
+    page.click_logo()
+
+def test_courses_button(driver):
+    page = HomePage(driver)
+    page.open()
+    page.click_courses()
