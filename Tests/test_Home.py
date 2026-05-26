@@ -14,13 +14,18 @@ def test_scroll(driver):
     page.open()
     page.scroll_page()
 
-
 def test_logo_button(driver):
     page = HomePage(driver)
     page.open()
     page.click_logo()
 
-def test_courses_button(driver):
+def test_contact_us(driver):
     page = HomePage(driver)
     page.open()
-    page.click_courses()
+    page.click_contact_us()
+
+
+# def test_courses_button(driver):
+#     page = HomePage(driver)
+#     page.open()
+#     page.click_courses()
