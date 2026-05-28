@@ -1,9 +1,6 @@
 import time
-# from telnetlib import EC
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from webdriver_manager.core import driver
+from Utils.window_utils import WindowUtils
 
 
 class HomePage:
@@ -30,44 +27,86 @@ class HomePage:
         logo_button.click()
         assert "WebDriverUniversity.com" in self.driver.title
 
+    def click_course(self):
+        course_buttons = self.driver.find_elements(By.CLASS_NAME, "course-btn")
+        main_window = WindowUtils.get_main_window(self.driver)
+
+        for each_course_btn in course_buttons:
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", each_course_btn)
+            self.driver.execute_script("arguments[0].click();", each_course_btn)
+            time.sleep(2)
+            expected_url = each_course_btn.get_attribute("href")
+
+            WindowUtils.switch_to_new_window(self.driver)
+            opened_url = self.driver.current_url
+            assert "udemy.com" in opened_url, f"Expected url: {expected_url}, Actual url: {opened_url}"
+            time.sleep(2)
+            self.driver.close()
+            WindowUtils.switch_back(self.driver, main_window)
+
+            print("\nEXPECTED URL:", expected_url)
+            print("ACTUAL URL:", opened_url)
+            print(bool(expected_url == opened_url))
+
     def click_contact_us(self):
-        contact_button = self.driver.find_element(By.ID, "contact-us")
+        WindowUtils.click_and_verify(self.driver, "contact-us")
 
-        main_window = self.driver.current_window_handle
+    def click_login(self):
+        WindowUtils.click_and_verify(self.driver, "login-portal")
 
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", contact_button)
-        contact_button.click()
+    def click_button_click(self):
+        WindowUtils.click_and_verify(self.driver, "button-clicks")
 
-        WebDriverWait(self.driver, 10).until(lambda d: len(d.window_handles) > 1)
+    def click_to_do(self):
+        WindowUtils.click_and_verify(self.driver, "to-do-list")
 
-        self.driver.switch_to.window(self.driver.window_handles[-1])
+    def click_object_model(self):
+        WindowUtils.click_and_verify(self.driver, "page-object-model")
 
-        opened_url = self.driver.current_url
-        assert "webdriveruniversity.com/Contact-Us/contactus.html" in opened_url
+    def click_card_link(self):
+        WindowUtils.click_and_verify(self.driver, "card-link")
 
-        self.driver.close()
-        self.driver.switch_to.window(main_window)
+    def click_drop_check_radio(self):
+        WindowUtils.click_and_verify(self.driver, "dropdown-checkboxes-radiobuttons")
 
+    def click_ajax_loader(self):
+        WindowUtils.click_and_verify(self.driver, "ajax-loader")
 
+    def click_actions(self):
+        WindowUtils.click_and_verify(self.driver, "actions")
 
+    def click_scroll_around(self):
+        WindowUtils.click_and_verify(self.driver, "scrolling-around")
 
+    def click_popup_alerts(self):
+        WindowUtils.click_and_verify(self.driver, "popup-alerts")
 
+    def click_iframe(self):
+        WindowUtils.click_and_verify(self.driver, "iframe")
 
-    # def click_courses(self):
-    #     course_buttons = self.driver.find_elements(By.CLASS_NAME, "course-btn")
-    #     main_window = self.driver.current_window_handle
-    #
-    #     for course_button in course_buttons:
-    #         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, "course-btn")))
-    #         self.driver.execute_script("arguments[0].scrollIntoView(true);", course_button)
-    #         self.driver.execute_script("arguments[0].click();", course_button)
-    #
-    #         WebDriverWait(self.driver, 10).until(lambda d: len(d.window_handles) > 1)
-    #         self.driver.switch_to.window(self.driver.window_handles[-1])
-    #
-    #         opened_url = self.driver.current_url
-    #         assert "udemy.com" in opened_url
-    #
-    #         self.driver.close()
-    #         self.driver.switch_to.window(main_window)
+    def click_hidden_elements(self):
+        WindowUtils.click_and_verify(self.driver, "hidden-elements")
 
+    def click_data_tables(self):
+        data_table_buttons = self.driver.find_elements(By.ID, "data-table")
+        main_window = WindowUtils.get_main_window(self.driver)
+
+        for each_data_table_button in data_table_buttons:
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", each_data_table_button)
+            self.driver.execute_script("arguments[0].click();", each_data_table_button)
+            time.sleep(2)
+            expected_url = each_data_table_button.get_attribute("href")
+
+            WindowUtils.switch_to_new_window(self.driver)
+            opened_url = self.driver.current_url
+            assert "webdriveruniversity.com" in opened_url, f"Expected url: {expected_url}, Actual url: {opened_url}"
+            time.sleep(2)
+            self.driver.close()
+            WindowUtils.switch_back(self.driver, main_window)
+
+            print("\nEXPECTED URL:", expected_url)
+            print("ACTUAL URL:", opened_url)
+            print(bool(expected_url == opened_url))
+
+    def click_ai_playground(self):
+        WindowUtils.click_and_verify(self.driver, "ai-playground")
