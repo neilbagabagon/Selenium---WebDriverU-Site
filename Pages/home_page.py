@@ -64,7 +64,7 @@ class HomePage:
         WindowUtils.click_and_verify(self.driver, "page-object-model")
 
     def click_card_link(self):
-        WindowUtils.click_and_verify(self.driver, "card-link")
+        WindowUtils.click_and_verify(self.driver, None,"//a[@href='Accordion/index.html']")
 
     def click_drop_check_radio(self):
         WindowUtils.click_and_verify(self.driver, "dropdown-checkboxes-radiobuttons")

@@ -1,7 +1,7 @@
 import time
+from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-
 
 class WindowUtils:
     @staticmethod
@@ -20,8 +20,18 @@ class WindowUtils:
         return driver.switch_to.window(main_window)
 
     @staticmethod
-    def click_and_verify(driver, element_id, expected_domain="webdriveruniversity.com"):
-        button = driver.find_element(By.ID, element_id)
+    def click_and_verify(driver, element_id, link_url, expected_domain="webdriveruniversity.com", ):
+        try:
+            if element_id:
+                button = driver.find_element(By.ID, element_id)
+            else:
+                raise NoSuchElementException
+        except NoSuchElementException:
+            if link_url:
+                button = driver.find_element(By.XPATH, link_url)
+            else:
+                raise NoSuchElementException
+
         main_window = driver.current_window_handle
         expected_url = button.get_attribute("href")
         time.sleep(2)
