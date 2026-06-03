@@ -20,18 +20,8 @@ class WindowUtils:
         return driver.switch_to.window(main_window)
 
     @staticmethod
-    def click_and_verify(driver, element_id, link_url, expected_domain="webdriveruniversity.com", ):
-        try:
-            if element_id:
-                button = driver.find_element(By.ID, element_id)
-            else:
-                raise NoSuchElementException
-        except NoSuchElementException:
-            if link_url:
-                button = driver.find_element(By.XPATH, link_url)
-            else:
-                raise NoSuchElementException
-
+    def click_and_verify(driver, link_url, expected_domain="webdriveruniversity.com"):
+        button = driver.find_element(By.XPATH, link_url)
         main_window = driver.current_window_handle
         expected_url = button.get_attribute("href")
         time.sleep(2)
@@ -51,24 +41,3 @@ class WindowUtils:
         print(f"\nEXPECTED URL: {expected_url}")
         print(f"ACTUAL URL: {opened_url}")
         print(bool(expected_url == opened_url))
-
-###### SAMPLE code if not a @staticmethod #####
-
-# login_button = self.driver.find_element(By.ID, "login-portal")
-# main_window = WindowUtils.get_main_window(self.driver)
-# expected_url = login_button.get_attribute("href")
-# time.sleep(2)
-#
-# self.driver.execute_script("arguments[0].scrollIntoView(true);", login_button)
-# self.driver.execute_script("arguments[0].click();", login_button)
-#
-# WindowUtils.switch_to_new_window(self.driver)
-# opened_url = self.driver.current_url
-# assert "webdriveruniversity.com" in f"Expected url: {expected_url}, Actual url: {opened_url}"
-#
-# self.driver.close()
-# WindowUtils.switch_back(self.driver, main_window)
-#
-# print("\nEXPECTED URL:", expected_url)
-# print("ACTUAL URL:", opened_url)
-# print(bool(expected_url == opened_url))
