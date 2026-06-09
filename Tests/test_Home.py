@@ -1,5 +1,7 @@
 import pytest
 from selenium import webdriver
+
+from Pages.contact_tab import ContactTab
 from Pages.home_page import HomePage
 
 
@@ -11,6 +13,7 @@ def driver():
     driver.quit()
 
 
+# HOME PAGE
 def test_scroll(driver):
     page = HomePage(driver)
     page.open()
@@ -112,22 +115,39 @@ def test_data_table(driver):
     page.open()
     page.click_data_table()
 
+
 def test_autocomplete_textfield(driver):
     page = HomePage(driver)
     page.open()
     page.click_autocomplete_textfield()
+
 
 def test_file_upload(driver):
     page = HomePage(driver)
     page.open()
     page.click_file_upload()
 
+
 def test_date_picker(driver):
     page = HomePage(driver)
     page.open()
     page.click_date_picker()
 
+
 def test_ai_playground(driver):
     page = HomePage(driver)
     page.open()
     page.click_ai_playground()
+
+
+# CONTACT US
+def test_contact_inputs(driver):
+    page = ContactTab(driver)
+    page.open()
+    page.input_details()
+
+
+def test_contact_inputs_empty(driver):
+    page = ContactTab(driver)
+    page.open()
+    page.input_empty()

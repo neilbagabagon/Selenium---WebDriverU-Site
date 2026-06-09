@@ -1,4 +1,6 @@
 import time
+
+import self
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -18,6 +20,11 @@ class WindowUtils:
     @staticmethod
     def switch_back(driver, main_window):
         return driver.switch_to.window(main_window)
+
+    @staticmethod
+    def driver_wait(driver):
+        WebDriverWait(driver, 5).until(lambda d: len(d.window_handles) > 1)
+        driver.switch_to.window(self.driver.window_handles[-1])
 
     @staticmethod
     def click_and_verify(driver, link_url, expected_domain="webdriveruniversity.com"):

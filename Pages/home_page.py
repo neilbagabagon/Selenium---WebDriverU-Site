@@ -1,6 +1,6 @@
 import time
 from selenium.webdriver.common.by import By
-from Utils.window_utils import WindowUtils
+from window_utils import WindowUtils
 
 
 class HomePage:
