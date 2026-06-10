@@ -24,7 +24,7 @@ class WindowUtils:
     @staticmethod
     def driver_wait(driver):
         WebDriverWait(driver, 5).until(lambda d: len(d.window_handles) > 1)
-        driver.switch_to.window(self.driver.window_handles[-1])
+        driver.switch_to.window(driver.window_handles[-1])
 
     @staticmethod
     def click_and_verify(driver, link_url, expected_domain="webdriveruniversity.com"):

@@ -1,8 +1,8 @@
 import pytest
 from selenium import webdriver
-
-from Pages.contact_tab import ContactTab
 from Pages.home_page import HomePage
+from Pages._contact_tab import ContactTab
+from Pages._login_tab import LoginTab
 
 
 @pytest.fixture
@@ -151,3 +151,9 @@ def test_contact_inputs_empty(driver):
     page = ContactTab(driver)
     page.open()
     page.input_empty()
+
+# LOGIN PORTAL
+def test_login_portal_succeed(driver):
+    page = LoginTab(driver)
+    page.open()
+    page.login_portal_succeed()
