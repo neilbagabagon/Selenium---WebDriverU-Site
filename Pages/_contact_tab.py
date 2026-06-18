@@ -35,7 +35,7 @@ class ContactTab:
         main_window = self.driver.current_window_handle
         self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
         self.driver.execute_script("arguments[0].click();", button)
-        WindowUtils.driver_wait(self.driver)
+        WindowUtils.driver_switch_wait(self.driver)
 
         # TEST RESET BUTTON
         inputs_all_true()
@@ -87,7 +87,7 @@ class ContactTab:
 
         self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
         self.driver.execute_script("arguments[0].click();", button)
-        WindowUtils.driver_wait(self.driver)
+        WindowUtils.driver_switch_wait(self.driver)
 
         self.driver.find_element(By.XPATH, "//input[@value='SUBMIT']").click()
         time.sleep(1)

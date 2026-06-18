@@ -1,8 +1,10 @@
 import pytest
 from selenium import webdriver
+
 from Pages.home_page import HomePage
 from Pages._contact_tab import ContactTab
 from Pages._login_tab import LoginTab
+from Pages._button_clicks_tab import ButtonClickTab
 
 
 @pytest.fixture
@@ -153,7 +155,15 @@ def test_contact_inputs_empty(driver):
     page.input_empty()
 
 # LOGIN PORTAL
-def test_login_portal_succeed(driver):
+def test_login_portal(driver):
     page = LoginTab(driver)
     page.open()
-    page.login_portal_succeed()
+    page.login_portal()
+
+# BUTTON CLICKS
+def test_button_clicks(driver):
+    page = ButtonClickTab(driver)
+    page.open()
+    page.button_dot_clicks()
+    page.button_js_clicks()
+    page.button_action_move_click()
