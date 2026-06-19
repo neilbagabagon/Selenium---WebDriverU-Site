@@ -5,6 +5,7 @@ from Pages.home_page import HomePage
 from Pages._contact_tab import ContactTab
 from Pages._login_tab import LoginTab
 from Pages._button_clicks_tab import ButtonClickTab
+from Pages._todo_list_tab import ToDoListTab
 
 
 @pytest.fixture
@@ -167,3 +168,10 @@ def test_button_clicks(driver):
     page.button_dot_clicks()
     page.button_js_clicks()
     page.button_action_move_click()
+
+# TO DO LIST
+def test_to_do_list(driver):
+    page = ToDoListTab(driver)
+    page.open()
+    page.add_to_list()
+    page.strike_and_remove()
