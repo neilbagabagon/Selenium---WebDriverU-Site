@@ -174,4 +174,6 @@ def test_to_do_list(driver):
     page = ToDoListTab(driver)
     page.open()
     page.add_to_list()
-    page.strike_and_remove()
+    page.strikethrough()
+    page.hover_delete()
+    page.add_strike_remove()
