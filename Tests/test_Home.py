@@ -6,6 +6,7 @@ from Pages._contact_tab import ContactTab
 from Pages._login_tab import LoginTab
 from Pages._button_clicks_tab import ButtonClickTab
 from Pages._todo_list_tab import ToDoListTab
+from Pages._page_object_model import PageObjectModel
 
 
 @pytest.fixture
@@ -177,3 +178,10 @@ def test_to_do_list(driver):
     page.strikethrough()
     page.hover_delete()
     page.add_strike_remove()
+
+def test_page_object_model(driver):
+    page = PageObjectModel(driver)
+    page.open()
+    page.controls_and_navigation()
+    page.nav_our_products()
+    page.nav_contact_us()
