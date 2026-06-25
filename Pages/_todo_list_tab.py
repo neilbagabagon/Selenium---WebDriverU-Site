@@ -66,7 +66,6 @@ class ToDoListTab:
         self.driver.switch_to.window(main_window)
 
     def add_strike_remove(self):
-        main_window = self.driver.current_window_handle
         self.window_handler()
 
         # ADD TO LIST
@@ -87,5 +86,6 @@ class ToDoListTab:
             each_todo_list.find_element(By.XPATH, "//i[@class='fa fa-trash']").click()
             time.sleep(1)
 
+        self.driver.find_element(By.XPATH, "//a[@id='home-link']").click()
+        time.sleep(1)
         self.driver.close()
-        self.driver.switch_to.window(main_window)
