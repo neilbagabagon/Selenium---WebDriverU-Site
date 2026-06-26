@@ -32,7 +32,7 @@ class PageObjectModel:
             action_right_click.move_to_element(right_control).click().perform()
             time.sleep(1)
 
-        for each_right_control in range(3):
+        for each_left_control in range(3):
             left_control = self.driver.find_element(By.XPATH, "//a[@class='left carousel-control']")
             action_left_click = ActionChains(self.driver)
             action_left_click.move_to_element(left_control).click().perform()
@@ -43,17 +43,19 @@ class PageObjectModel:
             each_radio_button.click()
             time.sleep(1)
 
-        def find_out_more_button():
-            self.driver.find_element(By.XPATH, "//button[@id='button-find-out-more']").click()
-            time.sleep(1)
-
         xpath = ["//button[normalize-space()='Find Out More']",
                   "//button[normalize-space()='Close']",
                   "//button[normalize-space()='×']",
                   "//div[@id='myModal']"]
         for each_xpath in xpath:
-            find_out_more_button()
-            self.driver.find_element(By.XPATH, each_xpath).click()
+            action_click = ActionChains(self.driver)
+
+            find_out_button = self.driver.find_element(By.XPATH, "//b[normalize-space()='Find Out More!']")
+            action_click.move_to_element(find_out_button).click().perform()
+            time.sleep(1)
+
+            exit_button = self.driver.find_element(By.XPATH, each_xpath)
+            action_click.move_to_element(exit_button).click().perform()
             time.sleep(1)
 
         button_navigation = ["//a[normalize-space()='Our Products']",

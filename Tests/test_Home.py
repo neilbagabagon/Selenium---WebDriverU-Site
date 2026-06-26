@@ -7,6 +7,7 @@ from Pages._login_tab import LoginTab
 from Pages._button_clicks_tab import ButtonClickTab
 from Pages._todo_list_tab import ToDoListTab
 from Pages._page_object_model import PageObjectModel
+from Pages._accordion_tab import AccordionTextEffect
 
 
 @pytest.fixture
@@ -16,144 +17,45 @@ def driver():
     yield driver
     driver.quit()
 
-
 # HOME PAGE
-def test_scroll(driver):
+def test_home_navigation(driver):
     page = HomePage(driver)
     page.open()
     page.scroll_page()
-
-
-def test_logo_button(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_logo()
 
-
-def test_course_button(driver):
+def test_course_navigation(driver):
     page = HomePage(driver)
     page.open()
     page.click_course()
 
-
-def test_contact_us(driver):
+def test_challenges_navigation(driver):
     page = HomePage(driver)
     page.open()
     page.click_contact_us()
-
-
-def test_login(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_login()
-
-
-def test_button_click(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_button_click()
-
-
-def test_to_do(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_to_do()
-
-
-def test_object_model(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_object_model()
-
-
-def test_card_link(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_card_link()
-
-
-def test_drop_check_radio(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_drop_check_radio()
-
-
-def test_ajax_loader(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_ajax_loader()
-
-
-def test_actions(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_actions()
-
-
-def test_scroll_around(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_scroll_around()
-
-
-def test_popup_alerts(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_popup_alerts()
-
-
-def test_iframes(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_iframe()
-
-
-def test_hidden_elements(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_hidden_elements()
-
-
-def test_data_table(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_data_table()
-
-
-def test_autocomplete_textfield(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_autocomplete_textfield()
-
-
-def test_file_upload(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_file_upload()
-
-
-def test_date_picker(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_date_picker()
-
-
-def test_ai_playground(driver):
-    page = HomePage(driver)
-    page.open()
     page.click_ai_playground()
-
 
 # CONTACT US
 def test_contact_inputs(driver):
     page = ContactTab(driver)
     page.open()
     page.input_details()
-
-
-def test_contact_inputs_empty(driver):
-    page = ContactTab(driver)
-    page.open()
     page.input_empty()
 
 # LOGIN PORTAL
@@ -179,9 +81,16 @@ def test_to_do_list(driver):
     page.hover_delete()
     page.add_strike_remove()
 
+# PAGE OBJECT MODEL
 def test_page_object_model(driver):
     page = PageObjectModel(driver)
     page.open()
     page.controls_and_navigation()
     page.nav_our_products()
     page.nav_contact_us()
+
+# ACCORDION AND TEXT EFFECTS
+def test_accordion_and_text_effect(driver):
+    page = AccordionTextEffect(driver)
+    page.open()
+    page.toggle_panels()

@@ -11,6 +11,13 @@ class ButtonClickTab:
     def open(self):
         self.driver.get("https://webdriveruniversity.com/")
 
+    def window_handler(self):
+        button = self.driver.find_element(By.XPATH, "//a[@id='button-clicks']")
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
+        time.sleep(1)
+        self.driver.execute_script("arguments[0].click();", button)
+        WindowUtils.driver_switch_wait(self.driver)
+
     # Using WebElement.click()
     def button_dot_clicks(self):
         button = self.driver.find_element(By.XPATH, "//a[@id='button-clicks']")

@@ -13,6 +13,13 @@ class LoginTab:
     def open(self):
         self.driver.get("https://webdriveruniversity.com/")
 
+    def window_handler(self):
+        button = self.driver.find_element(By.XPATH, "//a[@id='login-portal']")
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
+        time.sleep(1)
+        self.driver.execute_script("arguments[0].click();", button)
+        WindowUtils.driver_switch_wait(self.driver)
+
     def login_portal(self):
         def input_succeed():
             self.driver.find_element(By.XPATH, "//input[@id='text']").send_keys("webdriver")
@@ -22,11 +29,7 @@ class LoginTab:
             self.driver.find_element(By.XPATH, "//input[@id='text']").send_keys("izkitzo")
             self.driver.find_element(By.XPATH, "//input[@id='password']").send_keys("izkitzo123")
 
-        button = self.driver.find_element(By.XPATH, "//a[@id='login-portal']")
-
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
-        self.driver.execute_script("arguments[0].click();", button)
-        WindowUtils.driver_switch_wait(self.driver)
+        self.window_handler()
 
         input_failed()
         self.driver.find_element(By.XPATH, "//button[@id='login-button']").click()

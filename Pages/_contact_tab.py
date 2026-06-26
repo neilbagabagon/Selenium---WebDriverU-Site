@@ -11,6 +11,13 @@ class ContactTab:
     def open(self):
         self.driver.get("https://webdriveruniversity.com/")
 
+    def window_handler(self):
+        button = self.driver.find_element(By.XPATH, "//a[@id='contact-us']")
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
+        time.sleep(1)
+        self.driver.execute_script("arguments[0].click();", button)
+        WindowUtils.driver_switch_wait(self.driver)
+
     def input_details(self):
         def inputs_all_true():
             self.driver.find_element(By.XPATH, "//input[@placeholder='First Name']").send_keys("Neil")
@@ -31,11 +38,8 @@ class ContactTab:
             self.driver.find_element(By.XPATH, "//input[@placeholder='Email Address']").send_keys("njb@")
             self.driver.find_element(By.XPATH, "//textarea[@placeholder='Comments']").send_keys("lorem ipsum")
 
-        button = self.driver.find_element(By.XPATH, "//a[@id='contact-us']")
         main_window = self.driver.current_window_handle
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
-        self.driver.execute_script("arguments[0].click();", button)
-        WindowUtils.driver_switch_wait(self.driver)
+        self.window_handler()
 
         # TEST RESET BUTTON
         inputs_all_true()
@@ -82,12 +86,8 @@ class ContactTab:
         self.driver.switch_to.window(main_window)
 
     def input_empty(self):
-        button = self.driver.find_element(By.XPATH, "//a[@id='contact-us']")
         main_window = self.driver.current_window_handle
-
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
-        self.driver.execute_script("arguments[0].click();", button)
-        WindowUtils.driver_switch_wait(self.driver)
+        self.window_handler()
 
         self.driver.find_element(By.XPATH, "//input[@value='SUBMIT']").click()
         time.sleep(1)
